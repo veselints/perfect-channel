@@ -3,7 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 import TodoTable from '@/components/TodoTable.vue'
 
 describe('TodoTable.vue', () => {
-  it('renders props.msg when passed', () => {
+  it('renders todos passed', () => {
     const todos = [
       { id: 1, description: 'First', completed: true },
       { id: 2, description: 'Second', completed: true },

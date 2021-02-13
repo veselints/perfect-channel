@@ -17,6 +17,7 @@ namespace PerfectChannel.WebApi.Controllers
             _service = service;
         }
 
+        [HttpGet]
         public async Task<ActionResult> Get()
         {
             var result = await _service.Read();
@@ -24,9 +25,10 @@ namespace PerfectChannel.WebApi.Controllers
             return new JsonResult(result);
         }
 
-        public async Task<ActionResult> Post(string description)
+        [HttpPost]
+        public async Task<ActionResult> Post(TodoViewModel model)
         {
-            var result = await _service.Create(description);
+            var result = await _service.Create(model.Description);
 
             return new JsonResult(result);
         }

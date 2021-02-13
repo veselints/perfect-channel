@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { getters, mutations } from '@/store/index.js'
 
 const { pendingTodos, doneTodos } = getters
-const { remoteError, populateTodos } = mutations
+const { remoteError, populateTodos, addTodo } = mutations
 
 describe('test store', () => {
   it('getters return data', () => {
@@ -44,5 +44,15 @@ describe('test store', () => {
     remoteError(state, 'test error')
 
     expect(state.error).to.equal('test error')
+  })
+
+  it('AddTodo adds data', () => {
+    const state = { todos: [] }
+
+    expect(state.todos.length).to.equal(0)
+
+    addTodo(state, { id: 1, description: 'First', completed: true })
+
+    expect(state.todos.length).to.equal(1)
   })
 })

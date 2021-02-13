@@ -46,7 +46,7 @@ namespace PerfectChannel.WebApi.Test.Controllers
         {
             _service.Setup(s => s.Create("test")).ReturnsAsync(new TodoViewModel() { Description = "test", Completed = true });
 
-            var result = await _controller.Post("test") as JsonResult;
+            var result = await _controller.Post(new TodoViewModel() { Description = "test" }) as JsonResult;
             var value = result.Value as TodoViewModel;
 
             Assert.AreEqual(value.Description, "test");

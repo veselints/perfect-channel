@@ -12,6 +12,9 @@ export const getters = {
   },
   pendingTodos: state => {
     return state.todos.filter(todo => !todo.completed)
+  },
+  getError: state => {
+    return state.error ? state.error.message : ''
   }
 }
 
@@ -21,6 +24,9 @@ export const mutations = {
   },
   remoteError (state, err) {
     state.error = err
+  },
+  addTodo (state, todo) {
+    state.todos.push(todo)
   }
 }
 
@@ -30,6 +36,15 @@ export const actions = {
       headers: { 'Access-Control-Allow-Origin': '*' }
     })
       .then(result => context.commit('populateTodos', result.data))
+      .catch((err) => context.commit('remoteError', err))
+  },
+  createTodo (context, description) {
+    axios.post(ROOT_URL, {
+      description
+    }, {
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    })
+      .then(result => context.commit('addTodo', result.data))
       .catch((err) => context.commit('remoteError', err))
   }
 }

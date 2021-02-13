@@ -5,6 +5,7 @@ using PerfectChannel.WebApi.Data;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System;
 
 namespace PerfectChannel.WebApi.Test.Services
 {
@@ -22,15 +23,16 @@ namespace PerfectChannel.WebApi.Test.Services
         [Test]
         public async Task Read_Returns_Result()
         {
+            Random rand = new Random();
             int initialCount;
 
             using (var context = new TasksContext(_options))
             {
                 initialCount = context.Todos.Count();
 
-                context.Todos.Add(new Todo() { ID = 1, Description = "First", Completed = true });
-                context.Todos.Add(new Todo() { ID = 2, Description = "Second", Completed = true });
-                context.Todos.Add(new Todo() { ID = 3, Description = "Third", Completed = true });
+                context.Todos.Add(new Todo() { ID = rand.Next(), Description = "First", Completed = true });
+                context.Todos.Add(new Todo() { ID = rand.Next(), Description = "Second", Completed = true });
+                context.Todos.Add(new Todo() { ID = rand.Next(), Description = "Third", Completed = true });
                 context.SaveChanges();
             }
 

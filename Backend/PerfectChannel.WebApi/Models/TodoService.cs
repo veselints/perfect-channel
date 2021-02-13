@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PerfectChannel.WebApi.Data;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,11 +32,10 @@ namespace PerfectChannel.WebApi.Models
 		public async Task<TodoViewModel> Create(string description)
 		{
 			TodoViewModel result;
-			Random rand = new Random();
 
 			using (_context)
 			{
-				var todo = _context.Todos.Add(new Todo() { Description = description, Completed = false, ID =  rand.Next()});
+				var todo = _context.Todos.Add(new Todo() { Description = description });
 
 				await _context.SaveChangesAsync();
 
