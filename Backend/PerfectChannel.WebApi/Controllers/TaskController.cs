@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using PerfectChannel.WebApi.Data;
 using PerfectChannel.WebApi.Models;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace PerfectChannel.WebApi.Controllers
 {
@@ -12,24 +10,18 @@ namespace PerfectChannel.WebApi.Controllers
     [ApiController]
     public class TaskController : ControllerBase
     {
-        private readonly TasksContext _context;
+        private readonly ITodoService _service;
 
-        public TaskController(TasksContext context) 
+        public TaskController(ITodoService service) 
         {
-            _context = context;
+            _service = service;
         }
 
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            List<Todo> result;
-
-            using (_context)
-            {
-                result = _context.Todos.ToList();
-            }
+            var result = await _service.Read();
 
             return new JsonResult(result);
         }
-        // TODO: to be completed
     }
 }

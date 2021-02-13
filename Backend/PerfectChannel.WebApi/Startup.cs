@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PerfectChannel.WebApi.Data;
+using PerfectChannel.WebApi.Models;
 
 namespace PerfectChannel.WebApi
 {
@@ -22,6 +23,8 @@ namespace PerfectChannel.WebApi
         {
             services.AddDbContext<TasksContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<ITodoService, TodoService>();
 
             services.AddControllers();
             
