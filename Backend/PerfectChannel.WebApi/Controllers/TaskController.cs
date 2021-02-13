@@ -23,5 +23,12 @@ namespace PerfectChannel.WebApi.Controllers
 
             return new JsonResult(result);
         }
+
+        public async Task<ActionResult> Post(string description)
+        {
+            var result = await _service.Create(description);
+
+            return new JsonResult(result);
+        }
     }
 }

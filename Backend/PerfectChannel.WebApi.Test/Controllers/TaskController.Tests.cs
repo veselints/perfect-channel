@@ -25,13 +25,13 @@ namespace PerfectChannel.WebApi.Test.Controllers
         public async Task Read_Action_Returns_Result()
         {
             var todos = new List<TodoViewModel>
-        {
-            new TodoViewModel() { Description = "First", Completed = true },
-            new TodoViewModel() { Description = "Second", Completed = true },
-            new TodoViewModel() { Description = "Third", Completed = true },
-            new TodoViewModel() { Description = "Forth", Completed = false },
-            new TodoViewModel() { Description = "Fifth", Completed = false }
-        };
+            {
+                new TodoViewModel() { Description = "First", Completed = true },
+                new TodoViewModel() { Description = "Second", Completed = true },
+                new TodoViewModel() { Description = "Third", Completed = true },
+                new TodoViewModel() { Description = "Forth", Completed = false },
+                new TodoViewModel() { Description = "Fifth", Completed = false }
+            };
 
             _service.Setup(s => s.Read()).ReturnsAsync(todos.AsEnumerable());
 
@@ -39,6 +39,17 @@ namespace PerfectChannel.WebApi.Test.Controllers
             var value = result.Value as IEnumerable<TodoViewModel>;
 
             Assert.AreEqual(value.Count(), 5);
+        }
+
+        [Test]
+        public async Task Create_Action_Returns_ViewModel()
+        {
+            _service.Setup(s => s.Create("test")).ReturnsAsync(new TodoViewModel() { Description = "test", Completed = true });
+
+            var result = await _controller.Post("test") as JsonResult;
+            var value = result.Value as TodoViewModel;
+
+            Assert.AreEqual(value.Description, "test");
         }
     }
 }
