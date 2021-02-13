@@ -32,5 +32,13 @@ namespace PerfectChannel.WebApi.Controllers
 
             return new JsonResult(result);
         }
+
+        [HttpPut]
+        public async Task<ActionResult> Put(TodoViewModel model)
+        {
+            _service.Update(model.ToEntity());
+
+            return new JsonResult(model);
+        }
     }
 }

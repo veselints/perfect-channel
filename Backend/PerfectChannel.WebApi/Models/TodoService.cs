@@ -44,5 +44,15 @@ namespace PerfectChannel.WebApi.Models
 
 			return result;
 		}
+
+		public void Update(Todo model)
+		{
+			using (_context)
+			{
+				_context.Todos.Attach(model);
+				_context.Entry(model).State = EntityState.Modified;
+				_context.SaveChanges();
+			}
+		}
 	}
 }

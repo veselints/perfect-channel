@@ -87,5 +87,24 @@ namespace PerfectChannel.WebApi.Test.Services
                 Assert.AreEqual("sample descr", todoViewModel.Description);
             }
         }
+
+        [Test]
+        public void Update_Updates_Todo()
+        {
+            var rand = new Random().Next();
+
+            using (var context = new TasksContext(_options))
+            {
+                context.Todos.Add(new Todo() { ID = rand, Description = "First", Completed = false });
+                context.SaveChanges();
+            }
+
+            using (var context = new TasksContext(_options))
+            {
+                context.Update(new Todo() { ID = rand, Description = "First", Completed = true });
+
+                Assert.AreEqual(context.Todos.FirstOrDefault(f => f.ID == rand).Completed, true);
+            }
+        }
     }
 }

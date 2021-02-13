@@ -27,6 +27,10 @@ export const mutations = {
   },
   addTodo (state, todo) {
     state.todos.push(todo)
+  },
+  updateTodo (state, todo) {
+    const item = state.todos.find(t => t.id === todo.id)
+    Object.assign(item, todo)
   }
 }
 
@@ -45,6 +49,13 @@ export const actions = {
       headers: { 'Access-Control-Allow-Origin': '*' }
     })
       .then(result => context.commit('addTodo', result.data))
+      .catch((err) => context.commit('remoteError', err))
+  },
+  updateTodo (context, todo) {
+    axios.put(ROOT_URL, todo, {
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    })
+      .then(result => context.commit('updateTodo', result.data))
       .catch((err) => context.commit('remoteError', err))
   }
 }

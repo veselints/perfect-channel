@@ -8,5 +8,7 @@ namespace PerfectChannel.WebApi.Models
 		public Task<IEnumerable<TodoViewModel>> Read();
 
 		public Task<TodoViewModel> Create(string description);
+
+		public void Update(Todo model);
 	}
 }
