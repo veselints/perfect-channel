@@ -1,5 +1,10 @@
 <template>
   <table>
+    <tr>
+      <th>ID</th>
+      <th>Description</th>
+      <th>Completed</th>
+    </tr>
     <tr v-for="todo in todos" :key="todo.id">
       <td>{{todo.id}}</td>
       <td>{{todo.description}}</td>
@@ -28,5 +33,7 @@ export default {
 </script>
 
 <style scoped>
-
+  table, th, td {
+    border: 1px solid gray;
+  }
 </style>

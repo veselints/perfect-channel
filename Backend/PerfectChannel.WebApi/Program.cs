@@ -27,7 +27,9 @@ namespace PerfectChannel.WebApi
                 try
                 {
                     var context = services.GetRequiredService<TasksContext>();
-                    DbInitializer.Initialize(context);
+                    //DbInitializer.Initialize(context);
+                    //DbInitializer.Clear(context);
+                    context.Database.EnsureCreated();
                 }
                 catch (Exception ex)
                 {

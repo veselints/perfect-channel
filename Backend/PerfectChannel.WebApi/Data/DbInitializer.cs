@@ -33,5 +33,14 @@ namespace PerfectChannel.WebApi.Data
 
             context.SaveChanges();
         }
+
+        public static void Clear(TasksContext context)
+        {
+            context.Database.EnsureCreated();
+
+            context.Todos.RemoveRange(context.Todos.ToList());
+
+            context.SaveChanges();
+        }
     }
 }

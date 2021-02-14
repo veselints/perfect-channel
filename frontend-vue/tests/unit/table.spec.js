@@ -15,7 +15,7 @@ describe('TodoTable.vue', () => {
     })
 
     expect(wrapper.is(TodoTable)).to.equal(true)
-    expect(wrapper.findAll('tr').length).to.equal(3)
+    expect(wrapper.findAll('tr').length).to.equal(4)
     expect(wrapper.find('td').text()).to.equal('1')
   })
 })
